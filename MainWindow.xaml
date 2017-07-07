@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:MultiplicativeCypher"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <Label Content="Would you like to encrypt or decrypt a message?" Margin="60,50,60,0" FontSize="18"/>
+        <Button Content="Encrypt" Margin="120,100,280,0" Height="30"/>
+        <Button Content="Decrypt" Margin="280,-30,120,0" Height="30"/>
+    </StackPanel>
 </Window>
