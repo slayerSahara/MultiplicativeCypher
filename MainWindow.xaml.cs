@@ -71,5 +71,32 @@ namespace MultiplicativeCypher
             }
             return translation;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button tempButton = e.OriginalSource as Button;
+
+            if(tempButton.Name == "encrypt_click")
+            {
+                StartUp.Visibility = Visibility.Hidden;
+                UserEntry.Visibility = Visibility.Visible;
+            }
+            else if(tempButton.Name == "decrypt_click")
+            {
+                StartUp.Visibility = Visibility.Hidden;
+                UserEntry.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            Button tempButton = e.OriginalSource as Button;
+
+            if(tempButton.Name == "submit")
+            {
+                UserEntry.Visibility = Visibility.Hidden;
+                Cipher.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
