@@ -81,6 +81,11 @@ namespace MultiplicativeCypher
 
             test = (string)key.Header;
             encryptKey = Int32.Parse(test);
+            foreach (MenuItem temp in menu.Items)
+            {
+                temp.Background = Brushes.White;
+            }
+            key.Background = Brushes.Aquamarine;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -119,6 +124,24 @@ namespace MultiplicativeCypher
                 else
                 {
                     message.Content += decrypt(input.Text.ToString(), encryptKey);
+                }
+            }
+        }
+
+        private void redo_click(object sender, RoutedEventArgs e)
+        {
+            Button tempButton = e.OriginalSource as Button;
+
+            if (tempButton.Name == "Redo")
+            {
+                Cipher.Visibility = Visibility.Hidden;
+                StartUp.Visibility = Visibility.Visible;
+
+                input.Text = "";
+                message.Content = "Your message: ";
+                foreach (MenuItem temp in menu.Items)
+                {
+                    temp.Background = Brushes.White;
                 }
             }
         }
