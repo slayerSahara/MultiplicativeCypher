@@ -20,56 +20,120 @@ namespace MultiplicativeCypher
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int encryptKey = 0;
+        public int encryptKey;
         public bool cipherType = true;
         public MainWindow()
         {
             InitializeComponent();
+            letters();
         }
 
-        static int inverseMod(int encryptKey, int symbolLength)
+        public static Dictionary<char, int> alphabet;
+
+        public void letters()
         {
-            int length = symbolLength, v = 0, d = 1;
-            while (encryptKey > 0)
+            alphabet = new Dictionary<char, int>();
+            char c = 'a';
+            alphabet.Add(c, 0);
+
+            for (int i = 1; i < 26; i++)
             {
-                int t = length / encryptKey, x = encryptKey;
-                encryptKey = length % x;
-                length = x;
-                x = d;
-                d = v - t * x;
-                v = x;
+                alphabet.Add(++c, i);
             }
-            v %= symbolLength;
-            if (v < 0) v = (v + symbolLength) % symbolLength;
-            return v;
         }
 
-        public static string encrypt(string input, int encryptKey)
+        internal static int GetAlphabetPosition(int textPosition, int keyPosition, string mode)
+        {
+            int result = 0;
+
+            switch (mode)
+            {
+                case "encrypt":
+                    result = textPosition * keyPosition % 26;
+                    break;
+                case "decrypt":
+                    result = textPosition % 26 * keyPosition;
+
+                    if (result < 0)
+                    {
+                        result = (result * (0 - 1)) % 26;
+                    }
+
+                    break;
+            }
+
+            return result;
+        }
+
+        static int inverseMod(int encryptKey)
+        {
+            int inverse = 0;
+
+            switch (encryptKey)
+            {
+                case 1:
+                    inverse = 25;
+                    break;
+                case 25:
+                    inverse = 1;
+                    break;
+                case 3:
+                    inverse = 9;
+                    break;
+                case 9:
+                    inverse = 3;
+                    break;
+                case 5:
+                    inverse = 21;
+                    break;
+                case 21:
+                    inverse = 5;
+                    break;
+                case 7:
+                    inverse = 15;
+                    break;
+                case 15:
+                    inverse = 7;
+                    break;
+                case 11:
+                    inverse = 19;
+                    break;
+                case 19:
+                    inverse = 11;
+                    break;
+                case 17:
+                    inverse = 23;
+                    break;
+                case 23:
+                    inverse = 17;
+                    break;
+            }
+            return inverse;
+        }
+
+        public static string encrypt(string input, int encryptKey, string mode)
         {
             string translation = string.Empty;
 
-            char[] chars = input.ToUpper().ToCharArray();
-
             foreach (char letter in input)
             {
-                int index = Convert.ToInt32(letter - 65);
-                translation += Convert.ToChar(((index * encryptKey) % 26) + 65);
+                var charposition = alphabet[letter];
+                var res = GetAlphabetPosition(charposition, encryptKey, mode);
+                translation += alphabet.Keys.ElementAt(res % 26);
             }
             return translation;
         }
 
-        public static string decrypt(string input, int encryptKey)
+        public static string decrypt(string input, int encryptKey, string mode)
         {
             string translation = string.Empty;
-            int decryptKey = inverseMod(encryptKey, 26);
-
-            char[] chars = input.ToUpper().ToCharArray();
+            int decryptKey = inverseMod(encryptKey);
 
             foreach (char letter in input)
             {
-                int index = Convert.ToInt32(letter - 65);
-                if (index < 0) index = Convert.ToInt32(index) + 26;
-                translation += Convert.ToChar(((decryptKey * index) % 26) + 65);
+                var charposition = alphabet[letter];
+                var res = GetAlphabetPosition(charposition, decryptKey, mode);
+                translation += alphabet.Keys.ElementAt(res % 26);
             }
             return translation;
         }
@@ -114,11 +178,11 @@ namespace MultiplicativeCypher
 
                 if (cipherType)
                 {
-                    message.Content += encrypt(input.Text.ToString(), encryptKey);
+                    message.Content += encrypt(input.Text.ToString(), encryptKey, "encrypt");
                 }
                 else
                 {
-                    message.Content += decrypt(input.Text.ToString(), encryptKey);
+                    message.Content += decrypt(input.Text.ToString(), encryptKey, "decrypt");
                 }
             }
         }
