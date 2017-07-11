@@ -5,39 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MultiplicativeCypher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-        <StackPanel Name="StartUp" Visibility="Visible">
-            <Separator Height="15"></Separator>
-            <Label Content="Choose an encryption key:" FontSize="18" HorizontalAlignment="Center"></Label>
-            <Menu Width="92">
-                <MenuItem Name="key" Header="Encryption Key" HorizontalAlignment="Center">
-                    <MenuItem Header="3" Click="num_click"></MenuItem>
-                    <MenuItem Header="5" Click="num_click"></MenuItem>
-                    <MenuItem Header="7" Click="num_click"></MenuItem>
-                    <MenuItem Header="9" Click="num_click"></MenuItem>
-                    <MenuItem Header="11" Click="num_click"></MenuItem>
-                    <MenuItem Header="15" Click="num_click"></MenuItem>
-                    <MenuItem Header="17" Click="num_click"></MenuItem>
-                    <MenuItem Header="19" Click="num_click"></MenuItem>
-                    <MenuItem Header="21" Click="num_click"></MenuItem>
-                    <MenuItem Header="23" Click="num_click"></MenuItem>
+        Title="MainWindow" Height="350" Width="525" Background="Aquamarine">
+    <Grid>
+        <StackPanel x:Name="StartUp" Visibility="Visible" Margin="0,36,0,0" Background="Aquamarine">
+            <Separator Height="15" Background="Black"/>
+            <Label Content="Choose an encryption key:" FontSize="18" HorizontalAlignment="Center"/>
+            <Menu Width="92" Name="menu">
+                <!--<MenuItem x:Name="key" Header="Encryption Key" HorizontalAlignment="Center">-->
+                    <MenuItem Header="3" Click="num_click"/>
+                    <MenuItem Header="5" Click="num_click"/>
+                    <MenuItem Header="7" Click="num_click"/>
+                    <MenuItem Header="9" Click="num_click"/>
+                    <MenuItem Header="11" Click="num_click"/>
+                    <MenuItem Header="15" Click="num_click"/>
+                    <MenuItem Header="17" Click="num_click"/>
+                    <MenuItem Header="19" Click="num_click"/>
+                    <MenuItem Header="21" Click="num_click"/>
+                    <MenuItem Header="23" Click="num_click"/>
 
-                </MenuItem>
+                <!--</MenuItem>-->
             </Menu>
-            <Separator Height="20"></Separator>
+            <Separator Height="20" Background="Black"/>
             <Label Content="Would you like to encrypt or decrypt a message?" HorizontalAlignment="Center" FontSize="18"/>
-            <Button Click="Button_Click" Name="encrypt_click" Content="Encrypt" HorizontalAlignment="Center" Height="30"/>
-            <Button Click="Button_Click" Name="decrypt_click" Content="Decrypt" HorizontalAlignment="Center" Height="30"/>
-            <Separator Height="20"></Separator>
+            <Button Click="Button_Click" x:Name="encrypt_click" Content="Encrypt" HorizontalAlignment="Center" Height="30" Margin="10"/>
+            <Button Click="Button_Click" x:Name="decrypt_click" Content="Decrypt" HorizontalAlignment="Center" Height="30" Margin="10"/>
+            <Separator Height="20" Background="Black"/>
         </StackPanel>
-        <StackPanel Name="UserEntry" Visibility="Hidden">
-            <Label Content="Enter your message:" HorizontalAlignment="Center"></Label>
-            <TextBox Name="input" Height="23" TextWrapping="Wrap" Text="TextBox" HorizontalAlignment="Center"/>
-            <Button Click="Button_Click2" Name="submit" Content="Submit" HorizontalAlignment="Center"></Button>
+        <StackPanel x:Name="UserEntry" Visibility="Hidden" Background="Aquamarine" Margin="0,92,0,90">
+            <Separator Background="Black"></Separator>
+            <Label Content="Enter your message:" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="input" Height="23" Width="400" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="10"/>
+            <Button Click="Button_Click2" x:Name="submit" Content="Submit" HorizontalAlignment="Center" Margin="10"/>
+            <Separator Background="Black"></Separator>
         </StackPanel>
-        <StackPanel Name="Cipher" Visibility="Hidden">
-            <Label Name="message" Content="Here is your message: "></Label>
+        <StackPanel x:Name="Cipher" Visibility="Hidden" Background="Aquamarine" Margin="0,105,0,105">
+            <Label x:Name="message" Content="Your message: " HorizontalAlignment="Center" Margin="10"/>
+            <Button Click="redo_click" x:Name="Redo" Content="Go again?" HorizontalAlignment="Center" Margin="10"></Button>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>
