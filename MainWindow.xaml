@@ -8,17 +8,36 @@
         Title="MainWindow" Height="350" Width="525">
     <StackPanel>
         <StackPanel Name="StartUp" Visibility="Visible">
-            <Label Content="Would you like to encrypt or decrypt a message?" Margin="60,50,60,0" FontSize="18"/>
-            <Button Click="Button_Click" Name="encrypt_click" Content="Encrypt" Margin="120,100,280,0" Height="30"/>
-            <Button Click="Button_Click" Name="decrypt_click" Content="Decrypt" Margin="280,-30,120,0" Height="30"/>
+            <Separator Height="15"></Separator>
+            <Label Content="Choose an encryption key:" FontSize="18" HorizontalAlignment="Center"></Label>
+            <Menu Width="92">
+                <MenuItem Name="key" Header="Encryption Key" HorizontalAlignment="Center">
+                    <MenuItem Header="3" Click="num_click"></MenuItem>
+                    <MenuItem Header="5" Click="num_click"></MenuItem>
+                    <MenuItem Header="7" Click="num_click"></MenuItem>
+                    <MenuItem Header="9" Click="num_click"></MenuItem>
+                    <MenuItem Header="11" Click="num_click"></MenuItem>
+                    <MenuItem Header="15" Click="num_click"></MenuItem>
+                    <MenuItem Header="17" Click="num_click"></MenuItem>
+                    <MenuItem Header="19" Click="num_click"></MenuItem>
+                    <MenuItem Header="21" Click="num_click"></MenuItem>
+                    <MenuItem Header="23" Click="num_click"></MenuItem>
+
+                </MenuItem>
+            </Menu>
+            <Separator Height="20"></Separator>
+            <Label Content="Would you like to encrypt or decrypt a message?" HorizontalAlignment="Center" FontSize="18"/>
+            <Button Click="Button_Click" Name="encrypt_click" Content="Encrypt" HorizontalAlignment="Center" Height="30"/>
+            <Button Click="Button_Click" Name="decrypt_click" Content="Decrypt" HorizontalAlignment="Center" Height="30"/>
+            <Separator Height="20"></Separator>
         </StackPanel>
         <StackPanel Name="UserEntry" Visibility="Hidden">
-            <Label Content="Enter your message:"></Label>
-            <TextBox Height="23" TextWrapping="Wrap" Text="TextBox"/>
-            <Button Click="Button_Click2" Name="submit" Content="Submit"></Button>
+            <Label Content="Enter your message:" HorizontalAlignment="Center"></Label>
+            <TextBox Name="input" Height="23" TextWrapping="Wrap" Text="TextBox" HorizontalAlignment="Center"/>
+            <Button Click="Button_Click2" Name="submit" Content="Submit" HorizontalAlignment="Center"></Button>
         </StackPanel>
         <StackPanel Name="Cipher" Visibility="Hidden">
-            <Label Content="Here is your message:"></Label>
+            <Label Name="message" Content="Here is your message: "></Label>
         </StackPanel>
     </StackPanel>
 </Window>

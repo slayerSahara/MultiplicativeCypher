@@ -20,6 +20,8 @@ namespace MultiplicativeCypher
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int encryptKey = 0;
+        public bool cipherType = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -72,6 +74,15 @@ namespace MultiplicativeCypher
             return translation;
         }
 
+        private void num_click(object sender, RoutedEventArgs e)
+        {
+            string test = "";
+            MenuItem key = e.OriginalSource as MenuItem;
+
+            test = (string)key.Header;
+            encryptKey = Int32.Parse(test);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button tempButton = e.OriginalSource as Button;
@@ -80,11 +91,15 @@ namespace MultiplicativeCypher
             {
                 StartUp.Visibility = Visibility.Hidden;
                 UserEntry.Visibility = Visibility.Visible;
+
+                cipherType = true;
             }
             else if(tempButton.Name == "decrypt_click")
             {
                 StartUp.Visibility = Visibility.Hidden;
                 UserEntry.Visibility = Visibility.Visible;
+
+                cipherType = false;
             }
         }
 
@@ -96,6 +111,15 @@ namespace MultiplicativeCypher
             {
                 UserEntry.Visibility = Visibility.Hidden;
                 Cipher.Visibility = Visibility.Visible;
+
+                if (cipherType)
+                {
+                    message.Content += encrypt(input.Text.ToString(), encryptKey);
+                }
+                else
+                {
+                    message.Content += decrypt(input.Text.ToString(), encryptKey);
+                }
             }
         }
     }
