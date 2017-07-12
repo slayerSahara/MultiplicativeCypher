@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -111,15 +112,23 @@ namespace MultiplicativeCypher
             return inverse;
         }
 
+        public static string StripSpecial(string input)
+        {
+            Regex alpha = new Regex("[^a-zA-Z0-9]");
+            return alpha.Replace(input, "");
+        }
+
         public static string encrypt(string input, int encryptKey, string mode)
         {
             string translation = string.Empty;
 
             foreach (char letter in input)
             {
+
                 var charposition = alphabet[letter];
                 var res = GetAlphabetPosition(charposition, encryptKey, mode);
                 translation += alphabet.Keys.ElementAt(res % 26);
+
             }
             return translation;
         }
@@ -183,11 +192,11 @@ namespace MultiplicativeCypher
 
                 if (cipherType)
                 {
-                    message.Content += encrypt(input.Text.ToString(), encryptKey, "encrypt");
+                    message.Content += encrypt(StripSpecial(input.Text.ToString()), encryptKey, "encrypt");
                 }
                 else
                 {
-                    message.Content += decrypt(input.Text.ToString(), encryptKey, "decrypt");
+                    message.Content += decrypt(StripSpecial(input.Text.ToString()), encryptKey, "decrypt");
                 }
             }
         }
