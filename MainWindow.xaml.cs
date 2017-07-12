@@ -192,11 +192,11 @@ namespace MultiplicativeCypher
 
                 if (cipherType)
                 {
-                    message.Content += encrypt(StripSpecial(input.Text.ToString()), encryptKey, "encrypt");
+                    message.Content += encrypt(StripSpecial(input.Text.ToString().ToLower()), encryptKey, "encrypt");
                 }
                 else
                 {
-                    message.Content += decrypt(StripSpecial(input.Text.ToString()), encryptKey, "decrypt");
+                    message.Content += decrypt(StripSpecial(input.Text.ToString().ToLower()), encryptKey, "decrypt");
                 }
             }
         }
