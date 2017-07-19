@@ -21,7 +21,7 @@ namespace MultiplicativeCypher
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int encryptKey;
+        public int encryptKey = 0;
         public bool cipherType = true;
         public MainWindow()
         {
@@ -192,11 +192,27 @@ namespace MultiplicativeCypher
 
                 if (cipherType)
                 {
-                    message.Content += encrypt(StripSpecial(input.Text.ToString().ToLower()), encryptKey, "encrypt");
+                    if(encryptKey == 0)
+                    {
+                        message.Content = "Please Select an Encryption Key";
+                    }
+                    else
+                    {
+                        message.Content += encrypt(StripSpecial(input.Text.ToString().ToLower()), encryptKey, "encrypt");
+                    }
+                    
                 }
                 else
                 {
-                    message.Content += decrypt(StripSpecial(input.Text.ToString().ToLower()), encryptKey, "decrypt");
+                    if (encryptKey == 0)
+                    {
+                        message.Content = "Please Select an Encryption Key";
+                    }
+                    else
+                    {
+                        message.Content += decrypt(StripSpecial(input.Text.ToString().ToLower()), encryptKey, "decrypt");
+                    }
+                    
                 }
             }
         }
